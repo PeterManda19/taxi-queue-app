@@ -7,7 +7,9 @@ function TaxiQueue() {
 	}
 
 	function leaveQueue() {
-
+		if (queue.length > 0) {
+			queue.pop();
+		}
 	}
 
 	function joinTaxiQueue() {
