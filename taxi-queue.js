@@ -13,7 +13,6 @@ function TaxiQueue() {
 	}
 
 	function joinTaxiQueue() {
-
 	}
 
 	function queueLength() {
