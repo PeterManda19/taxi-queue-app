@@ -31,5 +31,5 @@ joinTaxiQueueButton.addEventListener("click", () => {
 departButton.addEventListener("click", () => {
     taxiQueue.taxiDepart();
     passengerQueueCount.textContent = taxiQueue.queueLength();
-    taxiQueueCount.textContent = taxiQueue.taxiQueueLength();
+    taxiQueueCount.textContent = taxiQueue.taxiQueueLength(); 
 });

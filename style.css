@@ -31,3 +31,7 @@ button {
 		display: flex;
 	}
 }
+
+.arrow-departed {
+	color: red; /* Apply color to the arrows */
+}
