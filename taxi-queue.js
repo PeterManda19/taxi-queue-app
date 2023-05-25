@@ -18,7 +18,6 @@ function TaxiQueue() {
 
 	function queueLength() {
 		return queue.length;
-
 	}
 
 	function taxiQueueLength() {
@@ -26,7 +25,9 @@ function TaxiQueue() {
 	}
 
 	function taxiDepart(){
-
+		if (queue.length >= 12) {
+			taxiQueue.pop();
+		} return taxiQueueLength()
 	}
 
 	return {
