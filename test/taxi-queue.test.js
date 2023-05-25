@@ -54,7 +54,7 @@ describe('The taxi queue app', function() {
 		taxiQueue.joinTaxiQueue();
 		taxiQueue.joinTaxiQueue();
 
-		assert.equal(3, taxi.taxiQueueLength());
+		assert.equal(3, taxiQueue.taxiQueueLength());
 
 	});
 

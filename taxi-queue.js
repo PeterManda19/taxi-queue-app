@@ -13,6 +13,7 @@ function TaxiQueue() {
 	}
 
 	function joinTaxiQueue() {
+		taxiQueue.push("taxi");
 	}
 
 	function queueLength() {
@@ -21,7 +22,7 @@ function TaxiQueue() {
 	}
 
 	function taxiQueueLength() {
-
+		return taxiQueue.length;
 	}
 
 	function taxiDepart(){
