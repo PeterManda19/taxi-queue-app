@@ -4,16 +4,19 @@ function TaxiQueue() {
 
 	function joinQueue() {
 		queue.push("passenger");
+		return queueLength();
 	}
 
 	function leaveQueue() {
 		if (queue.length > 0) {
 			queue.pop();
 		}
+		return queueLength();
 	}
 
 	function joinTaxiQueue() {
 		taxiQueue.push("taxi");
+		return taxiQueueLength();
 	}
 
 	function queueLength() {
@@ -28,7 +31,8 @@ function TaxiQueue() {
 		if (taxiQueue.length > 0 && queue.length >= 12) {
 			taxiQueue.pop();
 			queue.splice(0,12);
-		} return taxiQueueLength();
+		} 
+		return taxiQueueLength();
 	}
 
 	return {

@@ -58,24 +58,24 @@ describe('The taxi queue app', function() {
 
 	});
 
-	// the taxi queue will never be negative in the implemantation
-	// it ('should not allow the taxi queue to be less than 0', function() {
+	// Unnecesary test because the taxi queue will never be negative in the implemantation
+	it ('should not allow the taxi queue to be less than 0', function() {
 
-	// 	const taxiQueue = TaxiQueue();
+		const taxiQueue = TaxiQueue();
 
-	// 	taxiQueue.joinQueue();
-	// 	taxiQueue.joinQueue();
-	// 	taxiQueue.joinQueue();
+		taxiQueue.joinQueue();
+		taxiQueue.joinQueue();
+		taxiQueue.joinQueue();
 
-	// 	taxiQueue.leaveQueue();
-	// 	taxiQueue.leaveQueue();
-	// 	taxiQueue.leaveQueue();
-	// 	taxiQueue.leaveQueue();
-	// 	taxiQueue.leaveQueue();
+		taxiQueue.leaveQueue();
+		taxiQueue.leaveQueue();
+		taxiQueue.leaveQueue();
+		taxiQueue.leaveQueue();
+		taxiQueue.leaveQueue();
 
-	// 	assert.equal(0, taxiQueue.queueLength());
+		assert.equal(0, taxiQueue.queueLength());
 
-	// });
+	});
 
 
 	it ('should allow taxis to leave the queue if there is enough passengers queueing', function() {
