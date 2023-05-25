@@ -1,8 +1,9 @@
 function TaxiQueue() {
-
+	let queue = [];
+	let taxiQueue = [];
 
 	function joinQueue() {
-
+		queue.push("passenger");
 	}
 
 	function leaveQueue() {
@@ -14,6 +15,7 @@ function TaxiQueue() {
 	}
 
 	function queueLength() {
+		return queue.length;
 
 	}
 

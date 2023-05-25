@@ -58,6 +58,7 @@ describe('The taxi queue app', function() {
 
 	});
 
+	// the taxi queue will never be negative in the implemantation
 	// it ('should not allow the taxi queue to be less than 0', function() {
 
 	// 	const taxiQueue = TaxiQueue();
