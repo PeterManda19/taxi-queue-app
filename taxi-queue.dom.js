@@ -58,3 +58,5 @@ departButton.addEventListener("click", () => {
     updateQueueCountersInLocalStorage();
 });
 
+// Invoke initializeQueueCountersFromLocalStorage on page load
+window.addEventListener('load', initializeQueueCountersFromLocalStorage);
