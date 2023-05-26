@@ -11,6 +11,20 @@ const departButton = document.querySelector(".depart");
 
 const taxiQueue = TaxiQueue();
 
+// Initialize queue counters from localStorage
+function initializeQueueCountersFromLocalStorage() {
+    const storedPassengerQueueCount = localStorage.getItem('passengerQueueCount');
+    const storedTaxiQueueCount = localStorage.getItem('taxiQueueCount');
+  
+    if (storedPassengerQueueCount !== null) {
+      passengerQueueCount.textContent = storedPassengerQueueCount;
+    }
+  
+    if (storedTaxiQueueCount !== null) {
+      taxiQueueCount.textContent = storedTaxiQueueCount;
+    }
+}
+
 // DOM events
 joinQueueButton.addEventListener("click", () => {
     taxiQueue.joinQueue();
