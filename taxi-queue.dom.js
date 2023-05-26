@@ -35,21 +35,26 @@ function updateQueueCountersInLocalStorage() {
 joinQueueButton.addEventListener("click", () => {
     taxiQueue.joinQueue();
     passengerQueueCount.textContent = taxiQueue.queueLength();
+    updateQueueCountersInLocalStorage();
 });
   
 leaveQueueButton.addEventListener("click", () => {
     taxiQueue.leaveQueue();
     passengerQueueCount.textContent = taxiQueue.queueLength();
+    updateQueueCountersInLocalStorage();
 });
 
 joinTaxiQueueButton.addEventListener("click", () => {
     taxiQueue.joinTaxiQueue();
     passengerQueueCount.textContent = taxiQueue.queueLength();
     taxiQueueCount.textContent = taxiQueue.taxiQueueLength();
+    updateQueueCountersInLocalStorage();
 });
 
 departButton.addEventListener("click", () => {
     taxiQueue.taxiDepart();
     passengerQueueCount.textContent = taxiQueue.queueLength();
     taxiQueueCount.textContent = taxiQueue.taxiQueueLength(); 
+    updateQueueCountersInLocalStorage();
 });
+
