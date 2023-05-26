@@ -25,6 +25,12 @@ function initializeQueueCountersFromLocalStorage() {
     }
 }
 
+// Update queue counters in localStorage
+function updateQueueCountersInLocalStorage() {
+    localStorage.setItem('passengerQueueCount', passengerQueueCount.textContent);
+    localStorage.setItem('taxiQueueCount', taxiQueueCount.textContent);
+}
+
 // DOM events
 joinQueueButton.addEventListener("click", () => {
     taxiQueue.joinQueue();
