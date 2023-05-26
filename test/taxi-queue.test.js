@@ -1,6 +1,6 @@
-describe('The taxi queue app', function() {
+describe('The taxi queue app', () => {
 
-	it ('should allow people to join the queue', function() {
+	it ('should allow people to join the queue', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -14,7 +14,7 @@ describe('The taxi queue app', function() {
 
 	});
 
-	it ('should allow people to leave the queue', function() {
+	it ('should allow people to leave the queue', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -28,7 +28,7 @@ describe('The taxi queue app', function() {
 
 	});
 
-	it ('should not allow the people queue to be less than 0', function() {
+	it ('should not allow the people queue to be less than 0', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -46,7 +46,7 @@ describe('The taxi queue app', function() {
 
 	});
 
-	it ('should allow taxis to join the queue', function() {
+	it ('should allow taxis to join the queue', () => {
 		
 		const taxiQueue = TaxiQueue();
 
@@ -59,7 +59,7 @@ describe('The taxi queue app', function() {
 	});
 
 	// Unnecesary test because the taxi queue will never be negative in the implemantation
-	it ('should not allow the taxi queue to be less than 0', function() {
+	it ('should not allow the taxi queue to be less than 0', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -78,7 +78,7 @@ describe('The taxi queue app', function() {
 	});
 
 
-	it ('should allow taxis to leave the queue if there is enough passengers queueing', function() {
+	it ('should allow taxis to leave the queue if there is enough passengers queueing', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -114,7 +114,7 @@ describe('The taxi queue app', function() {
 
 	});
 
-	it ('should not allow a taxi to leave the queue if there is not enough passengers queueing', function() {
+	it ('should not allow a taxi to leave the queue if there is not enough passengers queueing', () => {
 
 
 		const taxiQueue = TaxiQueue();
@@ -148,7 +148,7 @@ describe('The taxi queue app', function() {
 
 	});
 
-	it ('should check that a taxi can not leave if the taxi queue is empty', function() {
+	it ('should check that a taxi can not leave if the taxi queue is empty', () => {
 
 		const taxiQueue = TaxiQueue();
 
@@ -180,4 +180,32 @@ describe('The taxi queue app', function() {
 		assert.equal(15, taxiQueue.queueLength());
 
 	});
+});
+
+describe('LocalStorage Tests', () => {
+	beforeEach(() => {
+	  // Clear localStorage before each test
+	  localStorage.clear();
+	});
+  
+	it('Queue counters are stored in localStorage', () => {
+	  // Simulate actions that update the queue counters
+	  taxiQueue.joinQueue();
+	  taxiQueue.joinTaxiQueue();
+  
+	  // Update queue counters in localStorage
+	  updateQueueCountersInLocalStorage();
+  
+	  // Check if the values are correctly stored in localStorage
+	  assert.strictEqual(localStorage.getItem('passengerQueueCount'), '1');
+	  assert.strictEqual(localStorage.getItem('taxiQueueCount'), '1');
+	});
+  
+	it('Factory Function constructor initializes queue counters', () => {
+	  const testTaxiQueue = TaxiQueue();
+  
+	  // Check the initial values of the queue counters
+	  assert.strictEqual(testTaxiQueue.queueLength(), 0);
+	  assert.strictEqual(testTaxiQueue.taxiQueueLength(), 0);
+	});  
 });

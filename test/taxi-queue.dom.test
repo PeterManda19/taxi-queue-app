@@ -1,0 +1,12 @@
+test('Queue counters are stored in localStorage', () => {
+		// Simulate actions that update the queue counters
+		taxiQueue.joinQueue();
+		taxiQueue.joinTaxiQueue();
+	  
+		// Update queue counters in localStorage
+		updateQueueCountersInLocalStorage();
+	  
+		// Check if the values are correctly stored in localStorage
+		assert.equal(localStorage.getItem('passengerQueueCount')), ('1');
+		assert.equal(localStorage.getItem('taxiQueueCount')), ('1');
+	});
