@@ -11,52 +11,41 @@ const departButton = document.querySelector(".depart");
 
 const taxiQueue = TaxiQueue();
 
-// Initialize queue counters from localStorage
-function initializeQueueCountersFromLocalStorage() {
-    const storedPassengerQueueCount = localStorage.getItem('passengerQueueCount');
-    const storedTaxiQueueCount = localStorage.getItem('taxiQueueCount');
-  
-    if (storedPassengerQueueCount !== null) {
-      passengerQueueCount.textContent = storedPassengerQueueCount;
-    }
-  
-    if (storedTaxiQueueCount !== null) {
-      taxiQueueCount.textContent = storedTaxiQueueCount;
-    }
-}
-
-// Update queue counters in localStorage
-function updateQueueCountersInLocalStorage() {
-    localStorage.setItem('passengerQueueCount', passengerQueueCount.textContent);
-    localStorage.setItem('taxiQueueCount', taxiQueueCount.textContent);
+// Update the passenger and taxi queue counts on the DOM
+function updateQueueCountsOnDOM() {
+    passengerQueueCount.textContent = taxiQueue.queueLength();
+    taxiQueueCount.textContent = taxiQueue.taxiQueueLength();
 }
 
 // DOM events
 joinQueueButton.addEventListener("click", () => {
     taxiQueue.joinQueue();
-    passengerQueueCount.textContent = taxiQueue.queueLength();
-    updateQueueCountersInLocalStorage();
+    // passengerQueueCount.textContent = taxiQueue.queueLength();
+    updateQueueCountsOnDOM();
 });
   
 leaveQueueButton.addEventListener("click", () => {
     taxiQueue.leaveQueue();
-    passengerQueueCount.textContent = taxiQueue.queueLength();
-    updateQueueCountersInLocalStorage();
+    // passengerQueueCount.textContent = taxiQueue.queueLength();
+    updateQueueCountsOnDOM();
 });
 
 joinTaxiQueueButton.addEventListener("click", () => {
     taxiQueue.joinTaxiQueue();
-    passengerQueueCount.textContent = taxiQueue.queueLength();
-    taxiQueueCount.textContent = taxiQueue.taxiQueueLength();
-    updateQueueCountersInLocalStorage();
+    // passengerQueueCount.textContent = taxiQueue.queueLength();
+    // taxiQueueCount.textContent = taxiQueue.taxiQueueLength();
+    updateQueueCountsOnDOM();
 });
 
 departButton.addEventListener("click", () => {
     taxiQueue.taxiDepart();
-    passengerQueueCount.textContent = taxiQueue.queueLength();
-    taxiQueueCount.textContent = taxiQueue.taxiQueueLength(); 
-    updateQueueCountersInLocalStorage();
+    // passengerQueueCount.textContent = taxiQueue.queueLength();
+    // taxiQueueCount.textContent = taxiQueue.taxiQueueLength(); 
+    updateQueueCountsOnDOM();
 });
 
+// Initial update of queue counts on the DOM
+updateQueueCountsOnDOM();
+
 // Invoke initializeQueueCountersFromLocalStorage on page load
-window.addEventListener('load', initializeQueueCountersFromLocalStorage);
+window.addEventListener('load', taxiQueue.initializeQueueCountersFromLocalStorage());

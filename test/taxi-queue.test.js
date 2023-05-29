@@ -181,3 +181,92 @@ describe('The taxi queue app', () => {
 
 	});
 });
+
+describe('LocalStorage Tests', () => {
+	beforeEach(() => {
+	  // Clear localStorage before each test
+	  localStorage.clear();
+	});
+  
+	it('Queue counters are stored in localStorage', () => {
+		const taxiQueue = TaxiQueue();
+	
+		// Simulate actions that update the queue counters
+		taxiQueue.joinQueue();
+		taxiQueue.joinTaxiQueue();
+	
+		// Check if the values are correctly stored in localStorage
+		assert.strictEqual(localStorage.getItem('queue'), JSON.stringify(['passenger']));
+		assert.strictEqual(localStorage.getItem('taxiQueue'), JSON.stringify(['taxi']));
+	});
+  
+	it('Factory Function constructor initializes passenger queue counters from localStorage', () => {
+		// Simulate stored passenger queue counters in localStorage
+		localStorage.setItem('queue', JSON.stringify(['passenger', 'passenger', 'passenger']));
+		
+		const testQueue = TaxiQueue();
+
+		testQueue.initializeQueueCountersFromLocalStorage();
+
+		// Check the initialized values of the passanger queue counters
+		assert.strictEqual(testQueue.queueLength(), 3);
+	});
+
+	it('Factory Function constructor initializes taxi queue counters from localStorage', () => {
+		// Simulate stored taxi queue counters in localStorage
+		localStorage.setItem('taxiQueue', JSON.stringify(['taxi', 'taxi']));
+		
+		const testTaxiQueue = TaxiQueue();
+  
+		testTaxiQueue.initializeQueueCountersFromLocalStorage();
+  
+		// Check the initialized values of the taxi queue counters
+		assert.strictEqual(testTaxiQueue.taxiQueueLength(), 2);
+	  });
+  
+	it('Updating queue counters updates localStorage', () => {
+		const taxiQueue = TaxiQueue();
+	
+		// Simulate actions that update the queue counters
+		taxiQueue.joinQueue();
+		taxiQueue.joinQueue();
+	
+		// Check if the updated values are correctly stored in localStorage
+		assert.strictEqual(localStorage.getItem('queue'), JSON.stringify(['passenger', 'passenger']));
+		assert.strictEqual(localStorage.getItem('taxiQueue'), JSON.stringify([]));
+	});
+  
+	it('Removing passenger from the queue updates localStorage', () => {
+		// Simulate stored queue counters in localStorage
+		localStorage.setItem('queue', JSON.stringify(['passenger', 'passenger', 'passenger']));
+	
+		const taxiQueue = TaxiQueue();
+
+		taxiQueue.initializeQueueCountersFromLocalStorage();
+	
+		// Simulate removing a passenger from the queue
+		taxiQueue.leaveQueue();
+	
+		// Check if the updated values are correctly stored in localStorage
+		assert.strictEqual(localStorage.getItem('queue'), JSON.stringify(['passenger', 'passenger']));
+		assert.strictEqual(localStorage.getItem('taxiQueue'), JSON.stringify([]));
+	});
+  
+	it('Simulating taxi departure updates queue counters in localStorage', () => {
+		// Simulate stored queue counters in localStorage
+		localStorage.setItem('queue', JSON.stringify(['passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger', 'passenger']));
+		localStorage.setItem('taxiQueue', JSON.stringify(['taxi']));
+	
+		const taxiQueue = TaxiQueue();
+
+		taxiQueue.initializeQueueCountersFromLocalStorage();
+	
+		// Simulate a taxi departure
+		taxiQueue.taxiDepart();
+	
+		// Check if the updated values are correctly stored in localStorage
+		assert.strictEqual(localStorage.getItem('queue'), JSON.stringify(['passenger', 'passenger', 'passenger', 'passenger']));
+		assert.strictEqual(localStorage.getItem('taxiQueue'), JSON.stringify([]));
+	});
+  });
+  

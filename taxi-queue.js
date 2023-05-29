@@ -4,10 +4,45 @@
  * @returns {Object} Object with methods to interact with the queue.
  */
 function TaxiQueue() {
+	// Check if localStorage is supported
+	const localStorageSupported = typeof Storage !== 'undefined';
+	
 	// Internal variables to track the queue and taxi queue
 	let queue = [];
 	let taxiQueue = [];
 
+	 /**
+	 * Retrieve queue counters from localStorage on initialization.
+	 * Populates the internal variables 'queue' and 'taxiQueue' with the stored values from localStorage if available.
+	 * @returns {Array} The retrieved values for 'taxiQueue' and 'queue' in the format [taxiQueue, queue].
+	 */
+	function initializeQueueCountersFromLocalStorage() {
+		if (localStorageSupported) {
+			const storedQueue = localStorage.getItem('queue');
+			const storedTaxiQueue = localStorage.getItem('taxiQueue');
+		
+			if (storedTaxiQueue) {
+				taxiQueue = JSON.parse(storedTaxiQueue);
+			}
+
+			if (storedQueue) {
+				queue = JSON.parse(storedQueue);
+			}
+			
+			return taxiQueue, queue;
+		}
+	}
+
+	/**
+	 * Update queue counters in localStorage.
+	 * Stores the current values of 'queue' and 'taxiQueue' in localStorage.
+	 */
+	function updateQueueCountersInLocalStorage() {
+		if (localStorageSupported) {
+			localStorage.setItem('queue', JSON.stringify(queue));
+			localStorage.setItem('taxiQueue', JSON.stringify(taxiQueue));
+		}
+	}
 
 	/**
 	 * Adds a passenger to the queue.
@@ -15,6 +50,7 @@ function TaxiQueue() {
 	 */
 	function joinQueue() {
 		queue.push("passenger");
+		updateQueueCountersInLocalStorage();
 		return queueLength();
 	}
 
@@ -25,6 +61,7 @@ function TaxiQueue() {
 	function leaveQueue() {
 		if (queue.length > 0) {
 			queue.pop();
+			updateQueueCountersInLocalStorage();
 		}
 		return queueLength();
 	}
@@ -35,6 +72,7 @@ function TaxiQueue() {
 	 */
 	function joinTaxiQueue() {
 		taxiQueue.push("taxi");
+		updateQueueCountersInLocalStorage();
 		return taxiQueueLength();
 	}
 
@@ -63,6 +101,7 @@ function TaxiQueue() {
 		if (taxiQueue.length > 0 && queue.length >= 12) {
 			taxiQueue.pop();
 			queue.splice(0,12);
+			updateQueueCountersInLocalStorage();
 		} 
 		return taxiQueueLength();
 	}
@@ -74,6 +113,8 @@ function TaxiQueue() {
 		joinTaxiQueue,
 		queueLength,
 		taxiQueueLength,
-		taxiDepart
+		taxiDepart,
+		initializeQueueCountersFromLocalStorage,
+		updateQueueCountersInLocalStorage
 	}
 }
